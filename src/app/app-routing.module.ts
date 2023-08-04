@@ -7,7 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 
 
 const appRoutes: Routes = [
-  {path:'', redirectTo:'line-graph', pathMatch:'full'},
+  {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'line-graph', component:LineChartComponent},
   {path:'bar-graph', component:BarGraphComponent},
   {path:'home', component:LandingPageComponent},
