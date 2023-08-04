@@ -1,28 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { NgForm } from '@angular/forms';
 import { PointXYModel } from '../pointXY.model';
 import { format } from 'path';
 
-
-
 @Component({
-  selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss']
+  selector: 'app-bar-graph',
+  templateUrl: './bar-graph.component.html',
+  styleUrls: ['./bar-graph.component.scss']
 })
-export class LineChartComponent implements OnInit {
+export class BarGraphComponent implements OnInit {
 
   constructor() { }
 
   public chart: any;
   data_pxy: PointXYModel[]=[
-    new PointXYModel(new Date('2010-01-04'), 17558.73),
+    new PointXYModel(new Date('2010-01-04'), 15558.73),
     new PointXYModel(new Date('2010-01-05'), 17686.24),
-    new PointXYModel(new Date('2010-01-06'), 17701.13),
-    new PointXYModel(new Date('2010-01-07'), 17615.72),
-    new PointXYModel(new Date('2010-01-08'), 17540.29),
-    new PointXYModel(new Date('2010-01-11'), 17526.71)  
+    new PointXYModel(new Date('2010-01-06'), 14701.13),
+    new PointXYModel(new Date('2010-01-07'), 13615.72),
+    new PointXYModel(new Date('2010-01-08'), 12540.29),
+    new PointXYModel(new Date('2010-01-11'), 11526.71)  
   ];
   
   public sorted_data_x: string[] = [];
@@ -37,7 +35,7 @@ export class LineChartComponent implements OnInit {
 
   createChart(){
     this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
+      type: 'bar', //this denotes tha type of chart
 
       data: {// values on X-Axis
         labels: this.sorted_data_x,
@@ -47,7 +45,23 @@ export class LineChartComponent implements OnInit {
           {
             label: "Index",
             data: this.sorted_data_y,
-            backgroundColor: 'blue'
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)'
+            ],
+            barThickness: 100,
           }
         ]
       },
@@ -83,7 +97,7 @@ export class LineChartComponent implements OnInit {
     const sensex_index = form.value.sensex_index;
     console.log(date, sensex_index);
     
-    var pointXY = new PointXYModel(new Date(parseInt(date)), sensex_index);
+    var pointXY = new PointXYModel(new Date(date), sensex_index);
     this.data_pxy.push(pointXY);
 
     this.sort_data();
@@ -102,7 +116,5 @@ export class LineChartComponent implements OnInit {
     // console.log(this.data_pxy);
 
   }
-
-  
 
 }
